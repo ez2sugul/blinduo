@@ -1,0 +1,28 @@
+{
+  "name": "converstion-analyzer",
+  "version": "1.0.0",
+  "description": "conversation analyzing among multiple persons to recognize which person most monopolize the conversation",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "app-root-path": "^1.0.0",
+    "chai": "^1.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test",
+    "start": "node ./lib/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ez2sugul/converstion-analyzer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ez2sugul/converstion-analyzer/issues"
+  },
+  "homepage": "https://github.com/ez2sugul/converstion-analyzer"
+}
