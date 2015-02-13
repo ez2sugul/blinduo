@@ -9,10 +9,10 @@ describe('ConversationReader', function() {
 	reader = new ConversationReader();
 	console.log(path.dirname(require.main.filename));
 	console.log('app-root-path : ' + appRoot);
-	var sFilePath = appRoot + '/data/KakaoTalkChats.txt';
 
 	describe('#readFile', function() {
 		it('should return array of lines', function(done) {
+			var sFilePath = appRoot + '/data/KakaoTalkChats.txt';
 			reader.readFile(sFilePath, function(err, aLines) {
 				if (err) {
 					throw err;
@@ -21,15 +21,17 @@ describe('ConversationReader', function() {
 				done();
 			});
 		});
-	});
 
-	describe('#readFile2', function() {
-		it('should return data ', function(done) {
-			reader.readFile2(sFilePath, function(err, aLines) {
+		it('should return 115 for line count', function(done) {
+			var hwangFile = appRoot + "/data/KakaoTalkChats-hwang.txt";
+			reader.readFile(hwangFile, function(err, aLines) {
+				if (err) {
+					throw err;
+				}
 
-				done();	
+				aLines.length.should.equal(115);
+				done();
 			});
-			
 		});
 	});
 });
@@ -45,9 +47,10 @@ describe('analyzer.js', function() {
 	analyzer = new Analyzer();
 	analyzer.setTextArray(aLines);
 
-	describe('#toString', function() {
+	describe('#toString', function(done) {
 		it('should return its name', function(done) {
 			analyzer.toString().should.equal('Analyzer');
+			done();
 		});
 	});
 
