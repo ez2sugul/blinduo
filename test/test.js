@@ -26,7 +26,7 @@ describe('ConversationReader', function() {
 	describe('#readFile2', function() {
 		it('should return data ', function(done) {
 			reader.readFile2(sFilePath, function(err, aLines) {
-			
+
 				done();	
 			});
 			
@@ -46,7 +46,7 @@ describe('analyzer.js', function() {
 	analyzer.setTextArray(aLines);
 
 	describe('#toString', function() {
-		it('should return its name', function() {
+		it('should return its name', function(done) {
 			analyzer.toString().should.equal('Analyzer');
 		});
 	});
@@ -54,10 +54,18 @@ describe('analyzer.js', function() {
 	describe('#parse', function() {
 		
 		it('should parse text to user name and user message', function(done) {
-			analyzer.parse(function(aoData) {
-				aoData.length.should.equal(1);
+			analyzer.parse(function(err, aoData) {
+				aoData.length.should.equal(5);
 				done();
 			});
-		})
+		});
+
+		it('should have 심언국 at first element and its message should equal to 그렇군', function(done) {
+			analyzer.parse(function(err, aoData) {
+				aoData[0].user.should.equal('심언국');
+				aoData[0].message.should.equal('그렇군');
+				done();
+			});
+		});
 	});
 });
