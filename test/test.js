@@ -80,10 +80,9 @@ describe('analyzer.js', function() {
 describe('sequelizer test', function() {
 	describe('#create tables', function() {
 		it('should create tables', function(done) {
-			db.usertable.sync({force : true});
-			db.member.sync({force : true});
-
-			done();
+			db.member.sync({force : true}).then(function() {
+				done();	
+			});
 		});
 	});
 
