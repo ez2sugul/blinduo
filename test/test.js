@@ -80,6 +80,7 @@ describe('analyzer.js', function() {
 describe('sequelizer test', function() {
 	describe('#create tables', function() {
 		it('should create tables', function(done) {
+			/** force: true option is to truncate table */
 			db.member.sync({force : true}).then(function() {
 				done();	
 			});
@@ -89,8 +90,14 @@ describe('sequelizer test', function() {
 	describe('#insert some data', function() {
 
 		it('should insert data', function(done) {
+
+			/** default timeout 2000 of mocha is too short 
+			for inserting 500 data */
+			this.timeout(5000);
+
 			member = db.member;
 			var insertedCount = 0;
+
 
 			fs.readFile(appRoot + '/data/blinduo.json', function(err, data) {
 				if (err) {
@@ -101,12 +108,11 @@ describe('sequelizer test', function() {
 				}
 
 				var data = JSON.parse(data);
-				// console.log(data);
 
 				data.forEach(function(value, index, arr) {
 					
-					member.create(value).then(function(result) {
-						
+					// add logging:false option to turn off sql output
+					member.create(value, {logging:false}).then(function(result) {
 						insertedCount++;
 						return result;
 					}, function(error) {
