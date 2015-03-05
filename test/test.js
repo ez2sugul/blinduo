@@ -5,6 +5,7 @@ var should = require('chai').should();
 var Analyzer = require('../lib/analyzer.js');
 var path = require('path');
 var fs = require('fs');
+var nodemailer = require('nodemailer');
 
 var db = require(appRoot + '/models');
 
@@ -81,8 +82,10 @@ describe('sequelizer test', function() {
 	describe('#create tables', function() {
 		it('should create tables', function(done) {
 			/** force: true option is to truncate table */
-			db.member.sync({force : true}).then(function() {
-				done();	
+			db.member.sync({
+				force: true
+			}).then(function() {
+				done();
 			});
 		});
 	});
@@ -110,13 +113,16 @@ describe('sequelizer test', function() {
 				var data = JSON.parse(data);
 
 				data.forEach(function(value, index, arr) {
-					
+
 					// add logging:false option to turn off sql output
-					member.create(value, {logging:false}).then(function(result) {
+					member.create(value, {
+						logging: false
+					}).then(function(result) {
 						insertedCount++;
 						return result;
 					}, function(error) {
 						console.log('ERROR : ' + error);
+						done();
 						return error;
 					}).then(function(result) {
 						if (index === arr.length - 1) {
@@ -124,12 +130,51 @@ describe('sequelizer test', function() {
 							done();
 							return;
 						}
-					});	
+					});
 
 				});
 
 			});
 
+		});
+	});
+
+});
+
+describe('email', function() {
+	describe('#send email to seunghoon100', function() {
+		this.timeout(5000);
+
+		it('...', function(done) {
+			var transporter = nodemailer.createTransport({
+				service: 'Gmail',
+				auth: {
+					user: 'bot.blinduo@gmail.com',
+					pass: 'qortmdgns1'
+				},
+				port: 465
+			});
+
+			var local = {
+				email: 'seunghoon100@gmail.com',
+				url: 'ssd'
+			};
+
+			transporter.sendMail({
+				from: 'blinduo bot',
+				to: local.email,
+				subject: 'test email',
+				html: 'html'
+			}, function(err, resStatus) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+
+				console.log(resStatus);
+
+				done();
+			});
 		});
 	});
 });
