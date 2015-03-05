@@ -15,7 +15,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "test",
+    "test": "mocha",
     "start": "node ./lib/app.js"
   },
   "repository": {
