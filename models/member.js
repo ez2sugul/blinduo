@@ -2,48 +2,65 @@
 
 module.exports = function(sequelize, DataTypes) {
 	var Member = sequelize.define('member', {
+		"id": {
+			type: DataTypes.INTEGER,
+			primaryKey: true,
+			autoIncrement: true
+		},
 		"username": {
 			type: DataTypes.STRING,
 			unique: true,
 			validate: {},
-			allowNull : false
+			allowNull: false,
 		},
 		"my-company": {
 			type: DataTypes.STRING,
 			unique: false,
-			allowNull : false
+			allowNull: false
 		},
 		"email": {
 			type: DataTypes.STRING,
 			unique: true,
-			allowNull : false,
-			validate:{isEmail:true}
+			allowNull: false,
+			validate: {
+				isEmail: true
+			}
 		},
 		"birth-year": {
 			type: DataTypes.INTEGER,
 			unique: false,
-			allowNull : false,
-			validate: {isNumeric:true}
+			allowNull: false,
+			validate: {
+				isNumeric: true
+			}
 		},
 		"uppperlimit": {
 			type: DataTypes.INTEGER,
 			unique: false,
-			allowNull : true,
-			defaultValue : 3,
-			validate: {isNumeric: true}
+			allowNull: true,
+			defaultValue: 3,
+			validate: {
+				isNumeric: true
+			}
 		},
 		"lowerlimit": {
 			type: DataTypes.INTEGER,
 			unique: false,
-			allowNull : true,
-			defaultValue : 3,
-			validate: {isNumeric: true}
+			allowNull: true,
+			defaultValue: 3,
+			validate: {
+				isNumeric: true
+			}
 		},
 		"gender": {
 			type: DataTypes.STRING,
 			unique: false,
 			allowNull: false,
-			validate: {isIn:[['M', 'F', 'm', 'f']]}
+			validate: {
+				isIn: [
+					['M', 'F', 'm', 'f']
+				]
+			}
 		},
 		"my-character": {
 			type: DataTypes.STRING,
@@ -80,6 +97,9 @@ module.exports = function(sequelize, DataTypes) {
 			unique: false,
 			allowNull: true
 		}
+	}, {
+		charset: 'utf8',
+		freezeTableName: true
 	});
 	return Member;
 };
