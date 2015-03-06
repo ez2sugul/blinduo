@@ -14,7 +14,7 @@ describe('ConversationReader', function() {
 	console.log(path.dirname(require.main.filename));
 	console.log('app-root-path : ' + appRoot);
 
-	describe('#readFile', function() {
+	describe('ConversationReader.readFile', function() {
 		it('should return array of lines', function(done) {
 			var sFilePath = appRoot + '/data/KakaoTalkChats.txt';
 			reader.readFile(sFilePath, function(err, aLines) {
@@ -42,7 +42,7 @@ describe('ConversationReader', function() {
 
 
 
-describe('analyzer.js', function() {
+describe('analyzer', function() {
 	var aLines = ['2013년 2월 7일 오후 3:14, 심언국 : 그렇군',
 		'2013년 2월 7일 오후 3:14, 심언국 : 넌?',
 		'2013년 2월 7일 오후 3:15, 회원님 : 환존했러',
@@ -52,14 +52,14 @@ describe('analyzer.js', function() {
 	analyzer = new Analyzer();
 	analyzer.setTextArray(aLines);
 
-	describe('#toString', function(done) {
+	describe('analyzer.toString', function(done) {
 		it('should return its name', function(done) {
 			analyzer.toString().should.equal('Analyzer');
 			done();
 		});
 	});
 
-	describe('#parse', function() {
+	describe('analyzer.parse', function() {
 
 		it('should parse text to user name and user message', function(done) {
 			analyzer.parse(function(err, aoData) {
@@ -78,8 +78,8 @@ describe('analyzer.js', function() {
 	});
 });
 
-describe('sequelizer test', function() {
-	describe('#create tables', function() {
+describe('sequelizer', function() {
+	describe('sequelizer.create tables', function() {
 		it('should create tables', function(done) {
 			/** force: true option is to truncate table */
 			db.member.sync({
@@ -90,7 +90,7 @@ describe('sequelizer test', function() {
 		});
 	});
 
-	describe('#insert some data', function() {
+	describe('sequelizer.insert some data', function() {
 
 		it('should insert data', function(done) {
 
@@ -142,7 +142,7 @@ describe('sequelizer test', function() {
 });
 
 describe('email', function() {
-	describe('#send email to seunghoon100', function() {
+	describe('email.send email to seunghoon100', function() {
 		this.timeout(5000);
 
 		it('...', function(done) {
